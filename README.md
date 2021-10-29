@@ -69,3 +69,22 @@ The order of rule applying is:
 3. Text
 
 > I recommand you to use Generator Function because it is more flexible.
+
+## CLI Tool
+
+### Install CLI
+
+```bash
+npm i -g testcase-gen
+```
+
+### Use CLI
+
+```bash
+testcase-gen --recipe [recipe] --output [output] --mode [mode]
+
+    --recipe (-r): Recipe JS File Path.
+    --output (-o): Output File Path.
+    --mode (-m): Generate Mode. "simple" or "normal".
+    --version (-V) or (-v): Show version.
+```
