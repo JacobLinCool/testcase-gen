@@ -1,10 +1,8 @@
-const { writeFileSync } = require("fs");
 const { Generator } = require("../lib");
-
 const cases = require("./sum.tc");
 
-const tc = new Generator();
-tc.load(cases);
-const generated = tc.gen("simple");
+const tc = new Generator(cases);
+const testcases = tc.gen("simple");
 
-writeFileSync("./testcases.txt", generated, "utf-8");
+const { writeFileSync } = require("fs");
+writeFileSync("./testcases.txt", testcases, "utf-8");
