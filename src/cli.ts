@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { existsSync, writeFileSync } from "fs";
 import { join } from "path";
 import { Generator, recipe, testcase, generateMode } from "./";
