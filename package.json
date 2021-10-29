@@ -4,6 +4,9 @@
     "description": "Testcase Generator",
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
+    "bin":{
+        "testcase-gen": "lib/cli.js"
+    },
     "files": [
         "lib"
     ],
