@@ -4,11 +4,11 @@ import { recipe, testcase, generateMode, testcaseGenerator } from "./types";
 class Generator {
     recipes: recipe[] = [];
 
-    constructor(testcases: any[] = []) {
+    constructor(testcases: testcase[] = []) {
         if (testcases.length) this.load(testcases);
     }
 
-    public load(testcases: any[]) {
+    public load(testcases: testcase[]) {
         this.recipes = testcases.map((tc) => {
             return Object.assign({ name: null, regex: null, generator: null, text: null, repeat: 1 }, tc);
         });
@@ -28,9 +28,9 @@ class Generator {
 
         let tc = "";
         for (let i = 0; i < rc.repeat; i++) {
-            if (rc.regex) tc += new RandExp(rc.regex).gen().trim();
-            else if (rc.generator) tc += rc.generator().trim();
-            else if (rc.text) tc += rc.text.trim();
+            if (typeof rc.generator === "function") tc += rc.generator().trim();
+            else if (rc.regex instanceof RegExp) tc += new RandExp(rc.regex).gen().trim();
+            else if (typeof rc.text === "string") tc += rc.text.trim();
             else continue;
             tc += "\n\n";
         }
