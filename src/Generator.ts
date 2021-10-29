@@ -4,23 +4,24 @@ import { recipe, testcase, generateMode, testcaseGenerator } from "./types";
 class Generator {
     recipes: recipe[] = [];
 
-    constructor(testcases: testcase[] = []) {
+    constructor(testcases: recipe[] = []) {
         if (testcases.length) this.load(testcases);
     }
 
-    public load(testcases: testcase[]) {
+    public load(testcases: recipe[]): Generator {
         this.recipes = testcases.map((tc) => {
             return Object.assign({ name: null, regex: null, generator: null, text: null, repeat: 1 }, tc);
         });
         return this;
     }
 
-    public gen(mode: generateMode = "normal") {
+    public gen(mode: generateMode = "normal"): testcase[] | string | null {
         const testcases: testcase[] = [];
         for (let i = 0; i < this.recipes.length; i++) testcases.push(this.genTestcase(this.recipes[i], i));
 
         if (mode == "normal") return testcases;
         else if (mode == "simple") return testcases.reduce((acc, cur) => acc + cur.testcase, "");
+        return null;
     }
 
     private genTestcase(rc: recipe, id: number = 0): testcase {
