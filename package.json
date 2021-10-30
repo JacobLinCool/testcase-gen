@@ -5,7 +5,8 @@
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
     "bin":{
-        "testcase-gen": "lib/cli.js"
+        "testcase-gen": "lib/cli.js",
+        "tc-gen": "lib/cli.js"
     },
     "files": [
         "lib"
