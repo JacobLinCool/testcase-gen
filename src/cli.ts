@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { existsSync, writeFileSync } from "fs";
-import { join } from "path";
+import { join, dirname, basename } from "path";
 import { Generator, recipe, testcase, generateMode } from "./";
 
 if (
@@ -62,11 +62,11 @@ const testcases = generator.gen(mode);
 const EndTime = Date.now();
 
 if (mode === "simple") {
-    if (!outputPath) outputPath = join(process.cwd(), "testcases.txt");
+    if (!outputPath) outputPath = join(dirname(recipePath), basename(basename(recipePath, ".js"), ".tc") + ".txt");
     writeFileSync(outputPath, testcases as string, "utf-8");
     console.log("\u001b[92m" + `Testcases generated in ${EndTime - StartTime}ms at ${outputPath}.` + "\u001b[0m");
 } else {
-    if (!outputPath) outputPath = join(process.cwd(), "testcases.json");
+    if (!outputPath) outputPath = join(dirname(recipePath), basename(basename(recipePath, ".js"), ".tc") + ".tc.json");
     writeFileSync(outputPath, JSON.stringify(testcases as testcase[], null, 2), "utf-8");
     console.log("\u001b[92m" + `${(testcases as testcase[]).length} testcases generated in ${EndTime - StartTime}ms at ${outputPath}.` + "\u001b[0m");
 }
